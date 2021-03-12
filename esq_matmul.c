@@ -4,10 +4,6 @@
 
 
 
-/* gera numeros aleatorios entre min e max */
-int myrandom(int min, int max){
-   return min + rand() / (RAND_MAX / (max - min + 1) + 1);
-}
 
 
 int main(){
@@ -28,10 +24,8 @@ int main(){
         a[i] = calloc(MAX, sizeof(int *));
     
     /* inicializa a matriz */
-    for(i = 0; i < n; i++)
-        for(j = 0; j < n; j++) 
-            a[i][j]= i+j;
     
+   
     /* exemplo de como calcular o tempo de execução somente do trecho
      * especifico que faz a operacao com as matrizes 
      */
