@@ -39,6 +39,7 @@ for (i = 0; i < N; i++)
       a[i][j]
    }
 ```
+Para cada opção, você deve medir o tempo de execução, seguindo o exemplo no código fornecido.
 
 3. Faça agora a multiplicação de matrizes considerando:  
    A * B = C, onde:
