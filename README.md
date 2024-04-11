@@ -41,6 +41,8 @@ for (i = 0; i < N; i++)
 ```
 Para cada opção, você deve medir o tempo de execução, seguindo o exemplo no código fornecido.
 
+**Crie dois executáveis para este item 2: um que percorre em ordem de linha e outro que percorre em ordem de coluna.**
+
 3. Faça agora a multiplicação de matrizes considerando:  
    A * B = C, onde:
     1. Dimensões de A: M x N
@@ -49,7 +51,7 @@ Para cada opção, você deve medir o tempo de execução, seguindo o exemplo no
 
  se quiser, pode utilizar matrizes quadradas.
 
-Para o item 3, implemente seu algoritmo de duas formas:
+Para o item 3, implemente seu algoritmo de duas formas (**crie dois executáveis, um para cada algoritmo**):
 
  1. Percorrendo as matrizes em ordem de linha
  2. Para utilizar corretamente o cache (L1, L2) utilizando a abordagem de **blocagem** apresentada no [artigo da Intel](https://www.intel.com/content/www/us/en/developer/articles/technical/putting-your-data-and-code-in-order-optimization-and-memory-part-1.html).
