@@ -1,4 +1,4 @@
-# Explorações de otimizações e hierarquia de memória (cache)
+# Explorações de otimizações e hierarquia de memória (cache) e pthreads
 
 ## Você sabe multiplicar uma matriz?
 
