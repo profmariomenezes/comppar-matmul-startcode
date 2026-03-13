@@ -6,7 +6,7 @@ Construa um código em C/C++ que faça a multiplicação entre matrizes. Primeir
 
 Por isso, os valores de sua matrizes são determinados (por exemplo, números sequenciais) para garantir que seu algoritmo funcione corretamente. Exemplo de como inicializar as matrizes:
 
-1. Inicialize as matrizes A e B com:
+## Item 1. Inicialize as matrizes A e B com:
 ```
       a[i][j]= i + j;
 
@@ -14,7 +14,7 @@ Por isso, os valores de sua matrizes são determinados (por exemplo, números se
 ```
 ou então utilize números aleatórios entre 10 e 40 para ambas as matrizes.
 
-2. Depois de inicializadas as matrizes, faça um loop que percorra toda a matriz A e verifique quantos elementos são pares, imprimindo o número de pares ao final.  
+## Item 2. Depois de inicializadas as matrizes, faça um loop que percorra toda a matriz A e verifique quantos elementos são pares, imprimindo o número de pares ao final.  
    *veja exemplo no código fornecido*.
 
 Você deve implementar o item 2 de duas formas: percorrendo a matriz em ordem de coluna e percorrendo em ordem de linha. Abaixo, 2 trechos de códigos de exemplos:
@@ -43,7 +43,7 @@ Para cada opção, você deve medir o tempo de execução, seguindo o exemplo no
 
 **Crie dois executáveis para este item 2: um que percorre em ordem de linha e outro que percorre em ordem de coluna.**
 
-3. Faça agora a multiplicação de matrizes considerando:  
+## Item 3. Faça agora a multiplicação de matrizes considerando:  
    A * B = C, onde:
     1. Dimensões de A: M x N
     2. Dimensões de B: N x X (qq dimensão razoável, mas não um vetor)
@@ -119,8 +119,34 @@ Row order; tempo para multiplicar: 0.053935 secs
 ==23161== LL miss rate:         0.4% (      0.0%     +       2.5%  )
 ```
 
+## Item 4: Adicionando Paralelismo com Pthreads
+
+Até esta etapa, focamos em como a organização do acesso à hierarquia de memória (técnica de blocagem) afeta o desempenho da multiplicação de matrizes de forma sequencial. Agora, vamos dar um passo além e explorar o **paralelismo no nível de thread**.
+
+Como vocês já construíram a base de criação e sincronização no **Laboratório de Pthreads**, o objetivo neste desafio é aplicar esse conhecimento para dividir o esforço computacional da multiplicação entre múltiplas threads, observando o comportamento da aplicação.
+
+### O que deve ser feito:
+
+1. **Implementação Paralela**: Crie uma nova versão do código (ex: `matmul_pthreads.c`) que divida o cálculo da matriz resultante $C$ entre $T$ threads. 
+   * *Sugestão de divisão:* Uma abordagem clássica e eficiente é dividir as linhas da matriz $A$ igualmente entre as threads disponíveis.
+2. **Combinação de Técnicas (Avançado)**: Integre a técnica de blocagem (*tiling*) desenvolvida na etapa anterior com a sua nova versão paralela em Pthreads. Cada thread deverá ser responsável por processar um subconjunto de blocos.
+3. **Bateria de Testes**: Execute seu programa variando o número de threads (ex: 1, 2, 4, 8, 16, 20, 32). 
+   * *Nota de Ambiente:* Lembrem-se de considerar a arquitetura de hardware onde estão executando os testes. Por exemplo, se utilizarem nosso servidor Dual Xeon (total de 20 cores físicos e 128GB de RAM), testem como o programa se comporta ao ultrapassar a barreira de 20 threads.
+4. **Coleta de Métricas**: Registre os tempos de execução da versão paralela (com e sem blocagem) e adicione-os aos seus gráficos e tabelas de análise.
+
+### Questões para Reflexão e Relatório:
+
+Ao documentar seus resultados, abordem os seguintes pontos:
+
+* **Speedup e Escalabilidade:** Como o tempo de execução se comporta ao aumentar o número de threads? O ganho de desempenho (*speedup*) é linear? Em que ponto adicionar mais threads deixa de trazer benefícios ou passa a degradar o tempo de execução?
+* **Overhead de Threads:** Existe um custo inerente ao sistema operacional para criar, gerenciar e destruir threads. Como esse *overhead* afeta o desempenho ao multiplicar matrizes pequenas em comparação com matrizes muito grandes?
+* **Pthreads + Blocagem:** Se você implementou a versão combinada, os ganhos de desempenho se somaram? A otimização de uso da memória cache potencializou o trabalho paralelo das threads?
+* **Falso Compartilhamento (*False Sharing*):** Dependendo de como você dividiu a gravação dos dados na matriz $C$, sua aplicação pode sofrer com a invalidação de linhas de cache entre os núcleos do processador. Vocês notaram algum indício disso?
+
+> **Dica de Implementação:** Tenha atenção redobrada com as condições de corrida (*race conditions*). Se a divisão de trabalho for feita de forma que cada thread calcule regiões estritamente independentes da matriz de destino $C$, o uso de *mutexes* no laço principal de cálculo se torna desnecessário, garantindo um desempenho consideravelmente superior.
+
 ## Entregas
 
 1. Você deve entregar um código fonte para cada versão do algoritmo implementado.
 2. Você deve entregar um relatório em PDF com as evidências de todas as **compilações** e **execuções** dos códigos.
-3. Você deve fazer uma análise da saída do **`valgrind`**  para o **item 3** discutindo os resultados.
+3. Você deve fazer uma análise da saída do **`valgrind`**  para o **item 3** e para o **item 4** discutindo os resultados.
