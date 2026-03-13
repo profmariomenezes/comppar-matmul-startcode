@@ -54,7 +54,7 @@ Para cada opção, você deve medir o tempo de execução, seguindo o exemplo no
 Para o item 3, implemente seu algoritmo de duas formas (**crie dois executáveis, um para cada algoritmo**):
 
  1. Percorrendo as matrizes em ordem de linha
- 2. Para utilizar corretamente o cache (L1, L2) utilizando a abordagem de **blocagem** apresentada no [artigo da Intel](https://www.intel.com/content/www/us/en/developer/articles/technical/putting-your-data-and-code-in-order-optimization-and-memory-part-1.html).
+ 2. Para utilizar corretamente o cache (L1, L2) utilizando a abordagem de **blocagem** apresentada no artigo **Guia de Blocagem de Matrizes** aqui no repositório.
 
 
 Você deve fazer a análise da velocidade do seu algoritmo compilando o código de duas formas:
